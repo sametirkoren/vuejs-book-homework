@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>The Elections</title>
+</head>
+<body>
+<div class="container">
+    <h1>Hikaye duyalım!</h1>
+    <div>
+        <h3>Sinan'ın Hikayeleri</h3>
+        <ul class="list-group">
+            <li v-for="story in storiesBy('Sinan')" class="list-group-item">
+                {{story.write}} dedi ki "{{story.plot}}"
+            </li>
+        </ul>
+        <h3>Hamza'nın Hikayeleri</h3>
+        <ul class="list-group">
+            <li v-for="story in storiesBy('Hamza')" class="list-group-item">
+                {{story.write}} dedi ki "{{story.plot}}"
+            </li>
+        </ul>
+        <h3>Şeyma'nın Hikayeleri</h3>
+        <ul class="list-group">
+            <li v-for="story in storiesBy('Şeyma')" class="list-group-item">
+                {{story.write}} dedi ki "{{story.plot}}"
+            </li>
+        </ul>
+        <h3>Bilge'nin Hikayeleri</h3>
+        <ul class="list-group">
+            <li v-for="story in storiesBy('Bilge')" class="list-group-item">
+                {{story.write}} dedi ki "{{story.plot}}"
+            </li>
+        </ul>
+        <pre>
+            {{$data}}
+        </pre>
+    </div>
+
+
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '.container',
+        data: {
+           stories : [
+               {
+                   plot : "Bugün arabamı çarptım!",
+                   writer : "Sinan"
+               },
+               {
+                   plot : "Dün birisi çantamı çaldı!",
+                   writer : "Şeyma"
+               },
+               {
+                   plot : "Biri çikolatamı yedi...",
+                   writer : "Hamza"
+               },
+               {
+                   plot : "Birinin çikolatasını yedim!",
+                   writer : "Bilge"
+               },
+
+           ]
+        },
+
+
+        methods: {
+            storiesBy : function (writer) {
+                return this.stories.filter(function (story) {
+                    return story.writer == writer
+                })
+            },
+        }
+    })
+</script>
+</html>
