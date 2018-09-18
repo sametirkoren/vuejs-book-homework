@@ -1,0 +1,95 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>The Elections</title>
+</head>
+<body>
+    <div class ="container">
+        <h1>Hikaye duyalım!</h1>
+        <div>
+            <h3>Sinan'ın Hikayeleri</h3>
+            <ul class="list-group">
+                <li v-for="story in storiesBy('Sinan')" class="list-group-item">
+                    {{ story.writer}} dedi ki  "{{story.plot}}"
+                </li>
+            </ul>
+            <h3>Hamza'nın hikayeleri</h3>
+            <ul class="list-group">
+                <li v-for="story in storiesBy('Hamza')" class="list-group-item">
+                    {{story.writer}} dedi ki "{{story.plot}}"
+                </li>
+            </ul>
+            <div class="form-group">
+                <label for="query">
+                    Ne aramıştınız ?
+                </label>
+                <input v-model="query" class="form-control">
+
+            </div>
+            <h3>Arama sonuçları : </h3>
+            <ul class="list-group">
+                <li v-for="story in search" class="list-group-item">
+                    {{story.writer}} dedi ki "{{story.plot}}"
+                </li>
+            </ul>
+        </div>
+        <pre>
+            {{$data}}
+        </pre>
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '.container',
+        data: {
+           stories : [
+               {
+                   plot : "Bugün arabamı çarptım!",
+                   writer : "Sinan",
+                   upvotes : 28
+               },
+               {
+                   plot : "Dün birisi çantamı çaldı!",
+                   writer : "Şeyma",
+                   upvotes : 8
+               },
+               {
+                   plot : "Biri çikolatamı yedi...",
+                   writer : "Hamza",
+                   upvotes : 51
+               },
+               {
+                   plot : "Birinin çikolatasını yedim!",
+                   writer : "Bilge",
+                   upvotes : 74
+               },
+
+
+           ],
+                query : ''
+
+        },
+        methods  : {
+            storiesBy : function (writer) {
+                return this.stories.filter(function(story){
+                    return story.writer == writer
+                });
+            }
+        },
+        computed :  {
+            search : function () {
+                var query = this.query
+                return this.stories.filter(function(story){
+                    return story.plot.includes(query)
+                })
+            }
+        }
+
+
+
+    })
+</script>
+</html>
